@@ -1,0 +1,552 @@
+/* General styles */
+:root {
+  font-family: sans-serif; /* Generic sans-serif font */
+  line-height: 1.6;
+  font-weight: 400;
+
+  color-scheme: light dark;
+
+  /* New Color Palette */
+  --color-primary-bg: #f5f7fa; /* Soft light gray */
+  --color-secondary-bg: #e0e5ec; /* Slightly darker for body */
+  --color-text: #333d47; /* Dark charcoal for text */
+  --color-header-bg: #2c3e50; /* Dark blue-gray */
+  --color-header-text: #ecf0f1; /* Light gray for header text */
+  --color-sidebar-bg: #ffffff;
+  --color-button-primary: #3498db; /* Modern blue */
+  --color-button-hover: #2980b9; /* Darker blue on hover */
+  --color-border: #dcdcdc; /* Light gray border */
+  --color-shadow: rgba(0, 0, 0, 0.08); /* Subtle shadow */
+  --color-container-bg: #ffffff;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--color-secondary-bg);
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--color-primary-bg);
+  color: var(--color-text);
+  font-family: sans-serif;
+}
+
+.main-layout {
+  display: flex;
+  flex: 1;
+}
+
+.sidebar {
+  width: 280px; /* Slightly wider sidebar */
+  background-color: var(--color-sidebar-bg);
+  padding: 2.5rem 1.5rem; /* More padding */
+  box-shadow: 4px 0 15px var(--color-shadow); /* Softer, larger shadow */
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem; /* Increased gap */
+  border-right: 1px solid var(--color-border); /* Subtle border */
+  transition: width 0.3s ease; /* Smooth transition for sidebar width */
+}
+
+.sidebar button {
+  background-color: var(--color-button-primary); /* Primary blue color */
+  color: white;
+  padding: 0.8rem 1.5rem; /* Reduced padding */
+  border: none;
+  border-radius: 10px; /* More rounded corners */
+  cursor: pointer;
+  font-size: 0.95rem; /* Slightly smaller font */
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Added box-shadow transition */
+  box-shadow: 0 6px 15px rgba(52, 152, 219, 0.25); /* Adjusted shadow color */
+  text-align: left;
+  font-weight: 500; /* Medium font weight */
+  position: relative; /* For pseudo-elements */
+  overflow: hidden; /* Hide overflow for hover effect */
+}
+
+.sidebar button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1); /* Light overlay for hover effect */
+  transition: left 0.3s ease;
+}
+
+.sidebar button:hover::before {
+  left: 0;
+}
+
+.sidebar button:hover:not(:disabled) {
+  background-color: var(--color-button-hover); /* Darker blue on hover */
+  transform: translateY(-3px); /* More pronounced lift */
+  box-shadow: 0 8px 20px rgba(52, 152, 219, 0.35); /* Enhanced shadow on hover */
+}
+
+.sidebar button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  opacity: 0.6; /* Slightly less opaque */
+  box-shadow: none;
+}
+
+header {
+  background-color: var(--color-header-bg); /* Darker, more professional header */
+  color: var(--color-header-text); /* Lighter text */
+  padding: 0.8rem 2rem; /* Decreased padding for smaller height */
+  text-align: left; /* Left align header text */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 10px var(--color-shadow); /* Stronger shadow */
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.5rem; /* Small font size for logo text */
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  font-family: sans-serif;
+}
+
+/* Content Area */
+.content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem; /* Reduced padding */
+  background-color: var(--color-primary-bg); /* Consistent with app background */
+}
+
+/* Calculator and Chat Containers */
+.calculator-container, .chat-container {
+  background-color: var(--color-container-bg);
+  padding: 2rem; /* Reduced padding */
+  border-radius: 15px; /* More rounded corners */
+  box-shadow: 0 10px 30px var(--color-shadow); /* Enhanced shadow */
+  width: 100%;
+  max-width: 600px; /* Slightly wider max-width */
+  text-align: left;
+  margin: 0 auto;
+  border: 1px solid var(--color-border); /* Subtle border */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+}
+
+.calculator-container:hover, .chat-container:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+}
+
+.calculator-container h2, .chat-container h2 {
+  color: var(--color-text); /* Darker heading color */
+  margin-bottom: 1.5rem; /* Reduced margin */
+  font-size: 1.8rem; /* Reduced font size */
+  text-align: center;
+  font-weight: 700;
+}
+
+/* Input Groups */
+.input-group {
+  margin-bottom: 1rem; /* Adjusted margin */
+}
+
+.input-columns {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem; /* Space between columns */
+}
+
+.input-columns .input-group {
+  flex: 1 1 calc(50% - 0.5rem); /* Two columns with a gap */
+  min-width: 250px; /* Minimum width for each column */
+}
+
+@media (max-width: 768px) {
+  .input-columns .input-group {
+    flex: 1 1 100%; /* Stack on smaller screens */
+  }
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.5rem; /* Reduced margin */
+  color: var(--color-text); /* Use main text color for labels */
+  font-weight: 600;
+  font-size: 1rem; /* Reduced font size */
+}
+
+.input-group input[type="number"],
+.input-group input[type="text"] {
+  width: 100%;
+  padding: 0.8rem 15px; /* Reduced padding */
+  border: 1px solid var(--color-border); /* Softer border color */
+  border-radius: 10px; /* More rounded corners */
+  font-size: 1rem; /* Reduced font size */
+  color: var(--color-text);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Smooth transitions */
+  box-sizing: border-box;
+}
+
+.input-group input[type="number"]:hover,
+.input-group input[type="text"]:hover {
+  background-color: var(--color-primary-bg); /* Subtle background change on hover */
+}
+
+.input-group input[type="number"]:focus,
+.input-group input[type="text"]:focus {
+  border-color: var(--color-button-primary); /* Blue focus border */
+  box-shadow: 0 0 0 4px rgba(52, 152, 219, 0.25); /* Blue shadow on focus */
+  outline: none;
+}
+
+/* Buttons */
+.calculator-container button,
+.chat-container button {
+  background-color: #2ecc71; /* A softer green */
+  color: white;
+  padding: 1rem 2rem; /* Reduced padding */
+}  border: none;
+  border-radius: 10px; /* More rounded corners */
+  cursor: pointer;
+  font-size: 1.25rem; /* Slightly larger font */
+  margin-top: 2.5rem; /* More margin */
+  width: 100%;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Added box-shadow transition */
+  box-shadow: 0 8px 20px rgba(40, 167, 69, 0.25); /* Green shadow */
+  position: relative; /* For pseudo-elements */
+  overflow: hidden; /* Hide overflow for hover effect */
+}
+
+.calculator-container button::before,
+.chat-container button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1); /* Light overlay for hover effect */
+  transition: left 0.3s ease;
+}
+
+.calculator-container button:hover::before,
+.chat-container button:hover::before {
+  left: 0;
+}
+
+.calculator-container button:hover,
+.chat-container button:hover {
+  background-color: #218838; /* Darker green on hover */
+  transform: translateY(-3px); /* More pronounced lift */
+  box-shadow: 0 10px 25px rgba(40, 167, 69, 0.35); /* Enhanced shadow on hover */
+}
+
+/* Result Display */
+.result {
+  margin-top: 3rem; /* More margin */
+  padding: 2rem; /* More padding */
+  background-color: #e9f7ef; /* Light green background for results */
+  border-radius: 10px;
+  border: 1px solid #d4edda; /* Subtle border */
+  color: #155724; /* Dark green text */
+  font-size: 1.1rem;
+  line-height: 1.8;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+}
+
+.result:hover {
+  transform: translateY(-3px); /* Lift effect on hover */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08); /* Stronger shadow on hover */
+}
+
+.result p {
+  margin-bottom: 0.8rem;
+}
+
+.result p:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 767px) {
+  header {
+    padding: 1rem 1.5rem; /* Adjust padding for mobile header */
+  }
+
+  header h1 {
+    font-size: 2rem;
+  }
+
+  .sidebar {
+    width: 100%;
+    padding: 1rem;
+    box-shadow: none;
+    border-right: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    flex-direction: row;
+    justify-content: space-around;
+    z-index: 1000;
+    background-color: #ffffff;
+    border-top: 1px solid #e0e0e0;
+  }
+
+  .sidebar button {
+    padding: 0.7rem 1rem;
+    font-size: 0.9rem;
+    text-align: center;
+    flex: 1;
+    margin: 0 0.2rem;
+    box-shadow: none;
+  }
+
+  .content {
+    padding-bottom: 80px; /* Space for fixed bottom nav */
+  }
+
+  .calculator-container, .chat-container {
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .calculator-container h2, .chat-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .input-group label {
+    font-size: 1rem;
+  }
+
+  .input-group input[type="number"],
+  .input-group input[type="text"] {
+    padding: 0.8rem 10px;
+    font-size: 1rem;
+  }
+
+  .calculator-container button,
+  .chat-container button {
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    margin-top: 2rem;
+  }
+
+  .result {
+    padding: 1.5rem;
+    font-size: 1rem;
+  }
+}
+  background-color: #e9f7ef; /* Lighter green background */
+  border: 1px solid #28a745;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 1.3rem;
+  color: #1e7e34; /* Darker green text */
+  font-weight: 700;
+}
+
+.result h3 {
+  margin: 0;
+  color: #1e7e34;
+}
+
+/* Chat specific styles */
+.chat-messages {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem;
+  height: 300px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  background-color: #fdfdfd;
+}
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  background-color: #fdfdfd;
+}
+
+.chat-input-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chat-input-group input {
+  flex-grow: 1;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.chat-input-group button {
+  width: auto;
+  padding: 0.8rem 1.2rem;
+  margin-top: 0;
+}
+
+.message {
+  margin-bottom: 0.8rem;
+  padding: 0.6rem 1rem;
+  border-radius: 15px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.message.user {
+  background-color: #dcf8c6;
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+.message.ai {
+  background-color: #e0e0e0;
+  align-self: flex-start;
+  margin-right: auto;
+}
+
+.coming-soon {
+  font-size: 2em;
+  color: #888;
+  text-align: center;
+  padding: 50px;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  margin: 50px auto;
+  max-width: 600px;
+  background-color: #f0f0f0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .main-layout {
+    flex-direction: column; /* Stack items vertically on small screens */
+  }
+
+  .sidebar {
+    display: none; /* Hide sidebar on small screens */
+  }
+
+  nav {
+    display: flex; /* Show top navigation on small screens */
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+  }
+
+  nav button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  nav button:hover:not(:disabled) {
+    background-color: #45a049;
+    transform: translateY(-2px);
+  }
+
+  nav button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+    box-shadow: none;
+  }
+
+  .App {
+    padding: 0;
+  }
+
+  .content {
+    padding: 1rem;
+  }
+
+  .calculator-container, .chat-container {
+    padding: 1.8rem;
+    max-width: 90%;
+  }
+
+  .calculator-container h2, .chat-container h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .input-group label {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .input-group input[type="number"],
+  .input-group input[type="text"] {
+    padding: 0.8rem 10px;
+    font-size: 1rem;
+  }
+
+  .calculator-container button,
+  .chat-container button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1.05rem;
+    margin-top: 1.5rem;
+  }
+
+  .result {
+    padding: 1.5rem;
+    font-size: 1.1rem;
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .App {
+    padding: 1rem;
+  }
+
+  nav {
+    gap: 0.8rem;
+  }
+
+  nav button {
+    padding: 0.7rem 1rem;
+  }
+
+  .calculator-container, .chat-container {
+    padding: 1rem;
+  }
+
+  .coming-soon {
+    font-size: 1.5em;
+    padding: 30px;
+  }
+}
