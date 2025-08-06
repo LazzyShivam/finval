@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import InvestmentCalculator from './components/InvestmentCalculator';
 import EarlyRetirementCalculator from './components/EarlyRetirementCalculator';
 import LoanCalculator from './components/LoanCalculator';
-import AIChatSupport from './components/AIChatSupport';
+// import AIChatSupport from './components/AIChatSupport';
 import SWPCalculator from './components/SWPCalculator';
 import './App.css';
 
@@ -37,7 +37,7 @@ function App() {
           <button onClick={() => setActiveComponent('retirement')}>Early Retirement Calculator</button>
           <button onClick={() => setActiveComponent('loan')}>Loan Calculator</button>
           <button onClick={() => setActiveComponent('swp')}>SWP Calculator</button>
-          <button onClick={() => setActiveComponent('chat')} disabled>AI Chat Support (Coming Soon)</button>
+
         </nav>
 
         <div className="content">
